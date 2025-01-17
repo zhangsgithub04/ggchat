@@ -24,7 +24,7 @@ def llm_response(question):
 
 def is_relevant(initial_input, subsequent_input):
     """Use zero-shot classifier to determine relevance."""
-    candidate_labels = ["computing", "Linux", "cybersecurity", "operating system", "networking", "attack", "vulnerability]
+    candidate_labels = ["computing", "Linux", "cybersecurity", "operating system", "networking", "attack", "vulnerability"]
     result = classifier(subsequent_input, candidate_labels)
     if result["labels"][0] == "relevant":
         return True
