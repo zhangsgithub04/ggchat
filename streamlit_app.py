@@ -21,8 +21,15 @@ def llm_response(question):
 def main():
     st.title("Chat Application using Gemini Pro")
 
-    # Store initial user input
-    initial_input = None
+    # Add instructions or context upfront
+    st.markdown("**Instructions:**")
+    st.markdown("* Ask a question related to a specific topic.")
+    st.markdown("* The model will respond based on the context provided.")
+    st.markdown("* Please ask follow-up questions related to the initial query.")
+
+    # Initialize session state
+    if "initial_input" not in st.session_state:
+        st.session_state.initial_input = None
 
     # Text input for user question
     user_quest = st.text_input("Ask a question:")
@@ -31,11 +38,9 @@ def main():
     btn = st.button("Ask")
 
     if btn and user_quest:
-        nonlocal initial_input
-
         # Check if it's the initial input
-        if initial_input is None:
-            initial_input = user_quest
+        if st.session_state.initial_input is None:
+            st.session_state.initial_input = user_quest
             result = llm_response(user_quest)
             if result:
                 st.subheader("Response:")
@@ -43,7 +48,7 @@ def main():
                     st.text(word.text)
         else:
             # Check if subsequent input is related to initial input
-            if initial_input.lower() not in user_quest.lower():
+            if st.session_state.initial_input.lower() not in user_quest.lower():
                 st.warning("Please ask a follow-up question related to your initial query.")
                 return
 
