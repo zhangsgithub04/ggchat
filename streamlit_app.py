@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as ggi
 
 # Load API key from secrets
-fetchheed_api_key = st.secrets["gemini-api-key"]
+fetchheed_api_key = st.secrets["gemini_api_key"]
 ggi.configure(api_key=fetchheed_api_key)
 
 # Initialize model and chat
