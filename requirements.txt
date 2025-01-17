@@ -2,3 +2,4 @@ streamlit
 google-generativeai
 transformers
 pytorch
+torch
